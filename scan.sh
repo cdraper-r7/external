@@ -12,11 +12,11 @@ echo "Files stored in $companypath"
 
 
 #make folder if it does not exist
-mkdir -p $companypath
+sudo mkdir -p $companypath
 
 echo "ENTER/VERIFY IN SCOPE IP ADDRESSES ONE ON EACH LINE IN CIDR NOTATION!!! Opening file in gedit please wait....."
 sleep 3
-gedit $companypath/inscope.txt
+sudo gedit $companypath/inscope.txt
 
 # if inscope does not exist then exit
 if [ ! -f $companypath/inscope.txt ]
@@ -33,14 +33,14 @@ END
 #########################################
 
 ### nmap scan ##
-mkdir -p $companypath/nmap
-nmap -vv -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/$companyname
+sudo mkdir -p $companypath/nmap
+sudo nmap -vv -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/$companyname
 
 ##Convert nmap scan to CSV for spreadsheet
 #python3 /opt/scripts/xml2csv.py -f $companypath/nmap/$companyname.xml -csv $companypath/nmap/$companyname.csv
 
 # eyewitness
 cd $companypath/
-eyewitness -x $companypath/nmap/$companyname.xml --no-prompt --delay 10 -d $companypath/eyewitness
+sudo eyewitness -x $companypath/nmap/$companyname.xml --no-prompt --delay 10 -d $companypath/eyewitness
 
 echo "SCRIPT COMPLETED!!! (chris is awesome)"
