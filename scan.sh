@@ -35,7 +35,7 @@ sudo mkdir -p $companypath/nmap
 sudo nmap -vv -Pn -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
 
 ##Convert nmap scan to CSV for spreadsheet
-#python3 /opt/scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
+python3 /opt/Nmap-Scan-to-CSV/nmap_xml_parser.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
 
 # eyewitness
 cd $companypath/
