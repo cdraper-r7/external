@@ -1,13 +1,11 @@
 #!/bin/bash
 
-echo "Enter company domain (ex. tesla.com)"
-read -p 'Domain: ' domain
+echo "Enter company name"
+read -p 'Name: ' name
 
 ### SET VARIABLES ###
-echo "Domain = $domain"
-companyname=`echo $domain | cut -d "." -f1`
-echo "Company Name = $companyname"
-companypath=~/$companyname
+echo "Name = $name"
+companypath=~/$name
 echo "Files stored in $companypath"
 
 
@@ -15,7 +13,7 @@ echo "Files stored in $companypath"
 sudo mkdir -p $companypath
 
 echo "ENTER/VERIFY IN SCOPE IP ADDRESSES ONE ON EACH LINE IN CIDR NOTATION!!! Opening file in gedit please wait....."
-sleep 3
+sleep 1
 sudo gedit $companypath/inscope.txt
 
 # if inscope does not exist then exit
@@ -34,13 +32,14 @@ END
 
 ### nmap scan ##
 sudo mkdir -p $companypath/nmap
-sudo nmap -vv -Pn -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/$companyname
+sudo nmap -vv -Pn -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
 
 ##Convert nmap scan to CSV for spreadsheet
-#python3 /opt/scripts/xml2csv.py -f $companypath/nmap/$companyname.xml -csv $companypath/nmap/$companyname.csv
+#python3 /opt/scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
 
 # eyewitness
 cd $companypath/
-sudo eyewitness -x $companypath/nmap/$companyname.xml --no-prompt --delay 10 -d $companypath/eyewitness
+#sudo eyewitness -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
+sudo /opt/EyeWitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
 
 echo "SCRIPT COMPLETED!!! (chris is awesome)"
