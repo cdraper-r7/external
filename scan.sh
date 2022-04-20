@@ -42,4 +42,4 @@ cd $companypath/
 #sudo eyewitness -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
 /opt/EyeWitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
 
-echo "SCRIPT COMPLETED!!! (chris is awesome)"
+echo "SCRIPT COMPLETED!!!"
